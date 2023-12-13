@@ -10,7 +10,16 @@ export const MealsScreen = ({ route }) => {
     return mealItem.categoryIds.indexOf(catId) >= 0;
   });
   function renderMealItem(itemData) {
-    return <MealItem title={itemData.item.title} />;
+    
+    return (
+      <MealItem
+        title={itemData.item.title}
+        imageUrl={itemData.item.imageUrl}
+        duration={itemData.item.duration}
+        complixity={itemData.item.complexity}
+        affordability={itemData.item.affordability}
+      />
+    );
   }
   return (
     <View style={styles.container}>
@@ -24,5 +33,6 @@ export const MealsScreen = ({ route }) => {
 };
 
 const styles = StyleSheet.create({
+
   container: { flex: 1, padding: 16 },
 });
