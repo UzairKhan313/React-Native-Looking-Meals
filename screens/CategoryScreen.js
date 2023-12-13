@@ -3,16 +3,21 @@ import { FlatList } from "react-native";
 import { CATEGORIES } from "../data/dummy-data";
 import { CategoryGridTitle } from "../components/CategoryGridTitle";
 
-function renderCategoryItem(itemData) {
-  return (
-    <CategoryGridTitle
-      title={itemData.item.title}
-      color={itemData.item.color}
-    />
-  );
-}
+const CategoryScreen = ({ navigation }) => {
+  // The Navigation and Route Props provided by the react Navigation and Route to only those Component which we use a screen.
 
-const CategoryScreen = () => {
+  function renderCategoryItem(itemData) {
+    function pressHandler() {
+      navigation.navigate("meals", { categoryId: itemData.item.id });
+    }
+    return (
+      <CategoryGridTitle
+        title={itemData.item.title}
+        color={itemData.item.color}
+        onPress={pressHandler}
+      />
+    );
+  }
   return (
     <FlatList
       data={CATEGORIES}
