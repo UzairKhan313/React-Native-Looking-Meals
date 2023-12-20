@@ -1,15 +1,15 @@
 import { createContext, useState } from "react";
 
 export const FavoritesContext = createContext({
-  id: [],
+  ids: [],
   addFavorite: (id) => {},
   removeFavorite: (id) => {},
 });
-const favoriteContextProvider = ({ children }) => {
+export const FavoriteContextProvider = ({ children }) => {
   const [favoritesMealsIds, setFavoriteMealsIds] = useState([]);
 
   const addFavorite = (id) => {
-    setFavoriteMealsIds((preFavIds) => [...preFavId, id]);
+    setFavoriteMealsIds((preFavIds) => [...preFavIds, id]);
   };
 
   const removeFavorite = (id) => {
@@ -30,4 +30,3 @@ const favoriteContextProvider = ({ children }) => {
     </FavoritesContext.Provider>
   );
 };
-export default favoriteContextProvider;

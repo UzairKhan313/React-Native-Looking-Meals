@@ -12,7 +12,7 @@ import { MealsScreen } from "./screens/MealsScreen";
 import { MealsDetailScreen } from "./screens/MealsDetailScreen";
 import { FavoritesScreen } from "./screens/FavoritesScreen";
 
-import favoriteContextProvider from "./store/context/fovurites-context";
+import { FavoriteContextProvider } from "./store/context/favorites-context";
 
 const stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -59,7 +59,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <favoriteContextProvider>
+      <FavoriteContextProvider>
         <NavigationContainer>
           <stack.Navigator
             screenOptions={{
@@ -90,7 +90,7 @@ export default function App() {
             />
           </stack.Navigator>
         </NavigationContainer>
-      </favoriteContextProvider>
+      </FavoriteContextProvider>
     </>
   );
 }

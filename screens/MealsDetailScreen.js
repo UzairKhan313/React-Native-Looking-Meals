@@ -7,22 +7,22 @@ import { Subtitle } from "../components/Subtitle";
 import { List } from "../components/List";
 import { HeaderButton } from "../components/HeaderButton";
 
-import { FavoritesContext } from "../store/context/fovurites-context";
+import { FavoritesContext } from "../store/context/favorites-context";
 
 export const MealsDetailScreen = ({ route, navigation }) => {
-  const mealId = route.params.mealId;
   const favoriteMealCtx = useContext(FavoritesContext);
-
-  const MealIsFavorite = favoriteMealCtx.ids.include(mealId);
+  const mealId = route.params.mealId;
 
   const selectedMeals = MEALS.find((meal) => meal.id === mealId);
+  const MealIsFavorite = favoriteMealCtx.ids.includes(mealId);
+
+  console.log(favoriteMealCtx, MealIsFavorite);
+
   function changeFavoriteStatusHandler() {
     if (MealIsFavorite) {
       favoriteMealCtx.removeFavorite(mealId);
-      console.log("Meals is Favorite");
     } else {
       favoriteMealCtx.addFavorite(mealId);
-      console.log("Meals is Remove From Favorite");
     }
   }
 
@@ -38,7 +38,7 @@ export const MealsDetailScreen = ({ route, navigation }) => {
         );
       },
     });
-  }, [navigation, headerButtonPressHandler]);
+  }, [navigation, changeFavoriteStatusHandler]);
   return (
     <ScrollView style={styles.rootContainer}>
       <Image style={styles.image} source={{ uri: selectedMeals.imageUrl }} />
