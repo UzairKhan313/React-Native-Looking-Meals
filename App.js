@@ -1,16 +1,18 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
 
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
+// import custom Componets
 import CategoryScreen from "./screens/CategoryScreen";
 import { MealsScreen } from "./screens/MealsScreen";
 import { MealsDetailScreen } from "./screens/MealsDetailScreen";
 import { FavoritesScreen } from "./screens/FavoritesScreen";
+
+import favoriteContextProvider from "./store/context/fovurites-context";
 
 const stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -57,36 +59,38 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <stack.Navigator
-          screenOptions={{
-            headerStyle: { backgroundColor: "#351401" },
-            headerTintColor: "white",
-            // contentStyle: { backgroundColor: "#3f2f25" },
-            headerTitleAlign: "center",
-            cardStyle: {
-              backgroundColor: "#3f2f25",
-            },
-          }}
-        >
-          <stack.Screen
-            name="Drawer"
-            component={DrawerNavigator}
-            options={{
-              headerShown: false,
+      <favoriteContextProvider>
+        <NavigationContainer>
+          <stack.Navigator
+            screenOptions={{
+              headerStyle: { backgroundColor: "#351401" },
+              headerTintColor: "white",
+              // contentStyle: { backgroundColor: "#3f2f25" },
+              headerTitleAlign: "center",
+              cardStyle: {
+                backgroundColor: "#3f2f25",
+              },
             }}
-          />
-          <stack.Screen name="meals" component={MealsScreen} />
-          <stack.Screen
-            name="mealDetail"
-            component={MealsDetailScreen}
-            options={{
-              title: "About the Meal",
-              contentStyle: { backgroundColor: "#3f2f25" },
-            }}
-          />
-        </stack.Navigator>
-      </NavigationContainer>
+          >
+            <stack.Screen
+              name="Drawer"
+              component={DrawerNavigator}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <stack.Screen name="meals" component={MealsScreen} />
+            <stack.Screen
+              name="mealDetail"
+              component={MealsDetailScreen}
+              options={{
+                title: "About the Meal",
+                contentStyle: { backgroundColor: "#3f2f25" },
+              }}
+            />
+          </stack.Navigator>
+        </NavigationContainer>
+      </favoriteContextProvider>
     </>
   );
 }
