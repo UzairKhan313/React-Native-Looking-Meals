@@ -8,7 +8,7 @@ export const HeaderButton = ({ icon, color, onPress }) => {
       style={({ pressed }) => pressed && styles.pressed}
     >
       
-      <Ionicons name={icon} size={32} color={color} />
+      <Ionicons name={icon} size={24} color={color} />
     </Pressable>
   );
 };
