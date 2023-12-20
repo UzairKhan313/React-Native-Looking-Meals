@@ -5,6 +5,7 @@ import { StyleSheet } from "react-native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 import CategoryScreen from "./screens/CategoryScreen";
 import { MealsScreen } from "./screens/MealsScreen";
@@ -22,10 +23,32 @@ function DrawerNavigator() {
         headerTintColor: "white",
         sceneContainerStyle: { backgroundColor: "#3f2f25" },
         headerTitleAlign: "center",
+        drawerContentStyle: { backgroundColor: "#351401" },
+        drawerInactiveTintColor: "white",
+        drawerActiveTintColor: "#351401",
+        drawerActiveBackgroundColor: "#e4baa1",
       }}
     >
-      <Drawer.Screen name="Category" component={CategoryScreen} />
-      <Drawer.Screen name="Favorites" component={FavoritesScreen} />
+      <Drawer.Screen
+        name="Category"
+        component={CategoryScreen}
+        options={{
+          title: "All Categories",
+          drawerIcon: ({ size, color }) => (
+            <Ionicons name="list" color={color} size={size} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Favorites"
+        component={FavoritesScreen}
+        options={{
+          title: "Favorite",
+          drawerIcon: ({ size, color }) => (
+            <Ionicons name="star" color={color} size={size} />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }
@@ -39,8 +62,11 @@ export default function App() {
           screenOptions={{
             headerStyle: { backgroundColor: "#351401" },
             headerTintColor: "white",
-            contentStyle: { backgroundColor: "#3f2f25" },
+            // contentStyle: { backgroundColor: "#3f2f25" },
             headerTitleAlign: "center",
+            cardStyle: {
+              backgroundColor: "#3f2f25",
+            },
           }}
         >
           <stack.Screen
@@ -56,6 +82,7 @@ export default function App() {
             component={MealsDetailScreen}
             options={{
               title: "About the Meal",
+              contentStyle: { backgroundColor: "#3f2f25" },
             }}
           />
         </stack.Navigator>
@@ -63,7 +90,3 @@ export default function App() {
     </>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {},
-});
