@@ -14,9 +14,13 @@ export const MealsDetailScreen = ({ route, navigation }) => {
   const mealId = route.params.mealId;
 
   const selectedMeals = MEALS.find((meal) => meal.id === mealId);
-  const MealIsFavorite = favoriteMealCtx.ids.includes(mealId);
+  let MealIsFavorite;
 
-  console.log(favoriteMealCtx, MealIsFavorite);
+  if (favoriteMealCtx.ids) {
+    console.log(favoriteMealCtx.ids);
+    MealIsFavorite = favoriteMealCtx.ids.includes(mealId);
+    console.log("Favoirte");
+  }
 
   function changeFavoriteStatusHandler() {
     if (MealIsFavorite) {
@@ -39,6 +43,7 @@ export const MealsDetailScreen = ({ route, navigation }) => {
       },
     });
   }, [navigation, changeFavoriteStatusHandler]);
+
   return (
     <ScrollView style={styles.rootContainer}>
       <Image style={styles.image} source={{ uri: selectedMeals.imageUrl }} />
